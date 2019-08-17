@@ -1,0 +1,18 @@
+version: "2"
+services:
+  node-api:
+        build:  
+            context: ./api
+        depends_on:
+            - postgres
+        restart: always
+        ports:
+            - "3000:3000"
+  postgres:
+    image: postgres:10.4
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: zallpy
+      POSTGRES_PASSWORD: zallpy
+      POSTGRES_DB: zallpy
