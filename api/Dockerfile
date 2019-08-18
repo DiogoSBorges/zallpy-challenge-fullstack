@@ -6,11 +6,11 @@ COPY ./package.json .
 COPY ./package-lock.json .
 
 RUN npm install
+
+COPY . .
+
 RUN npm run tsc
 
-
-COPY ./build ./build
-
 EXPOSE 3000
-
-CMD npm start
+#node_modules/.bin/sequelize db:migrate --env=docker
+CMD  npx sequelize db:migrate --env=docker  &&  npx sequelize db:seed:undo:all && npx sequelize db:seed:all --env=docker && npm start

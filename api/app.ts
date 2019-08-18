@@ -3,7 +3,11 @@
 //var path = require('path');
 //var cookieParser = require('cookie-parser');
 //var logger = require('morgan');
+
+import './environment'
+
 import express from 'express';
+
 
 export const app: express.Application = express();
 

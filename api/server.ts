@@ -4,8 +4,8 @@ import {sequelize} from './sequelize';
 
 const port = process.env.PORT || 3000;
 
-(async () => {
-  await sequelize.sync({force: true});
+(async () => {  
+  await sequelize.Sequelize;
 
   createServer(app)
     .listen(
