@@ -12,5 +12,5 @@ COPY . .
 RUN npm run tsc
 
 EXPOSE 3000
-#node_modules/.bin/sequelize db:migrate --env=docker
+
 CMD  npx sequelize db:migrate --env=docker  &&  npx sequelize db:seed:undo:all && npx sequelize db:seed:all --env=docker && npm start

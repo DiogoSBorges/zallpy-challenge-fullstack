@@ -9,7 +9,7 @@ module.exports = {
       nome: {
         type: Sequelize.STRING,
         allowNull: false
-      },
+      },      
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false        

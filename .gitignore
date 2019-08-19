@@ -1,4 +1,5 @@
-api/node_modules
+*/node_modules
+
 api/build
 
-/node_modules
+
