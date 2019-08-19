@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-function loggerMiddleware(
+function loggerHandler(
   request: Request,
   response: Response,
   next: NextFunction
@@ -9,4 +9,4 @@ function loggerMiddleware(
   next();
 }
 
-export default loggerMiddleware;
+export default loggerHandler;

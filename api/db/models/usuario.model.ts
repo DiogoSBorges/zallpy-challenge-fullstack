@@ -7,7 +7,7 @@ import {
   Model
 } from "sequelize-typescript";
 
-import UsuarioTipo  from "./usuario-tipo.ts";
+import UsuarioTipo  from "./usuario-tipo.model";
 
 @Table({
   tableName: "Usuario"

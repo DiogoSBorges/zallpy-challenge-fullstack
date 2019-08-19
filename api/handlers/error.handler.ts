@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { HttpException } from "../exceptions/http.exception";
 
-function errorMiddleware(
+function errorHandler(
   error: HttpException,
   request: Request,
   response: Response,
@@ -15,4 +15,4 @@ function errorMiddleware(
   });
 }
 
-export default errorMiddleware;
+export default errorHandler;

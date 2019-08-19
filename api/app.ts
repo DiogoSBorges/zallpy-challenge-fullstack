@@ -2,6 +2,9 @@ import errorHandler from "./handlers/error.handler";
 import loggerHandler from "./handlers/logger.handler.";
 import IController from "./interfaces/controller.interface";
 
+import swaggerUi from 'swagger-ui-express'
+import * as swaggerDocument from './swagger.json'
+
 import "./environment";
 
 import express from "express";
@@ -14,6 +17,7 @@ export class App {
 
     this.iniciarMiddlewares();
     this.iniciarController(controllers);
+    this.iniciarSwagger();
   }
 
   public iniciarMiddlewares() {
@@ -27,5 +31,9 @@ export class App {
     controllers.forEach(controller => {
       this.app.use("/", controller.router);
     });
+  }
+
+  private iniciarSwagger(){
+    this.app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   }
 }
