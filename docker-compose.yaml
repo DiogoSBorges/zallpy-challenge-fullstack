@@ -1,16 +1,26 @@
 version: "2"
 services:
+  ui:
+    build:
+      context: ./ui
+    depends_on:
+      - node-api
+    restart: always
+    ports:
+      - "8000:80"
+    environment:
+      NODE_ENV: docker
 
   node-api:
-      build:  
-          context: ./api
-      depends_on:
-          - postgres
-      restart: always
-      ports:
-          - "3000:3000"
-      environment:
-        NODE_ENV: docker 
+    build:
+      context: ./api
+    depends_on:
+      - postgres
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: docker
 
   postgres:
     image: postgres:10.4
@@ -20,4 +30,3 @@ services:
       POSTGRES_USER: zallpy
       POSTGRES_PASSWORD: zallpy
       POSTGRES_DB: zallpy
-    
