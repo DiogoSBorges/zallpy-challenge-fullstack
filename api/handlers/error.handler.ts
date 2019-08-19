@@ -8,7 +8,7 @@ function errorHandler(
   next: NextFunction
 ) {
   const status = error.status || 500;
-  const message = error.message || "Something went wrong";
+  const message = error.message || "Ops !!! Ocorreu um erro.";
   response.status(status).send({
     status,
     message
