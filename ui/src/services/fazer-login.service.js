@@ -1,24 +1,20 @@
+import ApiRequestService from "./api-request.service";
+import UsuarioProfileService from "./usuario-profile.service";
+
 class LoginService {
   async fazerLoginAsync(email, senha) {
-
-    const response = await fetch(`${process.env.REACT_APP_APP_URL}/login`,{
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            email,
-            senha
-        })
-      });
+    var response = await ApiRequestService.postAsync(
+      "login",
+      { email, senha },
+      false
+    );
+    var retorno = await response.json();
 
     if (!response.ok) {
-        throw new Error(`APP failed, HTTP status ${response.status}`);
+      throw new Error(retorno.message);
+    } else {
+      UsuarioProfileService.salvarUsuario(retorno);
     }
-
-    const data = await response.json();
-    return data;
   }
 }
 

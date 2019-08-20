@@ -1,35 +1,41 @@
 class UsuarioProfileService {
-  static saveUser(user) {
-    sessionStorage.setItem("user", JSON.stringify(user));
+  static salvarUsuario(usuario) {
+    sessionStorage.setItem("usuario", JSON.stringify(usuario));
   }
 
-  static removeUser() {
-    sessionStorage.removeItem("user");
+  static obterUsuario() {
+    if (this.isAutenticado()) {
+      return JSON.parse(sessionStorage.getItem("usuario"));      
+    }
+    return null;
   }
 
-  static isAuthenticated() {
-    let user = sessionStorage.getItem("user");
-    if (user != null) {
+  static removerUsuario() {
+    sessionStorage.removeItem("usuario");
+  }
+
+  static isAutenticado() {
+    const usuario = sessionStorage.getItem("usuario");
+    if (usuario != null) {
       return true;
     } else {
       return false;
     }
   }
 
-  static isAuthorized(roles) {
-    if (this.isAuthenticated()) {
+  static isAutorizado(roles) {
+    if (this.isAutenticado()) {
       if (!roles) return false;
 
-      const user = JSON.parse(sessionStorage.getItem("user"));
+      const usuario = JSON.parse(sessionStorage.getItem("usuario"));
 
-      var userRole = user.data.tipoId === 1 ? 'admin': 'user';
-      
-        if(roles.indexOf(userRole)  !== -1){
-          return true;
-        }else{
-          return false;
-        }
+      var userRole = usuario.data.tipoId === 1 ? "admin" : "user";
 
+      if (roles.indexOf(userRole) !== -1) {
+        return true;
+      } else {
+        return false;
+      }
 
       /*const countAllowed = Object.values(roles).filter(
         x => user.roles.indexOf(x) !== -1

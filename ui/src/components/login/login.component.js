@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
 import LoginService from "./../../services/fazer-login.service";
-import UsuarioProfileService from "./../../services/usuario-profile.service";
 
 class AppLogin extends Component {
   constructor(props) {
@@ -11,7 +10,8 @@ class AppLogin extends Component {
       login: "",
       password: "",
       isLoading: false,
-      loginSuccess: false
+      loginSuccess: false,
+      errorMessage:''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -29,14 +29,13 @@ class AppLogin extends Component {
 
     try {
       this.setState({ isLoading: true });
-      var user = await LoginService.fazerLoginAsync(
+      await LoginService.fazerLoginAsync(
         this.state.login,
         this.state.password
       );
-      UsuarioProfileService.saveUser(user);
       this.setState({ isLoading: false, loginSuccess: true });
     } catch (error) {
-      this.setState({ isLoading: false, loginSuccess:false});
+      this.setState({ isLoading: false, loginSuccess:false, errorMessage: error.message});
     }
   }
 
@@ -49,6 +48,7 @@ class AppLogin extends Component {
     }
     return (
       <div>
+        {this.state.errorMessage}
         <form onSubmit={this.handleSubmit}>
           <label>
             Login:

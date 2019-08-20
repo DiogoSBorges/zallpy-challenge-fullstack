@@ -13,8 +13,8 @@ const AppPrivateRoute = ({
   <Route
     {...rest}
     render={props =>        
-      UserProfileService.isAuthenticated() === true ? (
-        UserProfileService.isAuthorized(Roles) ? (
+      UserProfileService.isAutenticado() === true ? (
+        UserProfileService.isAutorizado(Roles) ? (
           <Layout>
             <Component {...props} />
           </Layout>
