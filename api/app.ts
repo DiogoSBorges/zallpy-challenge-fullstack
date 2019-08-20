@@ -1,5 +1,6 @@
 import errorHandler from "./handlers/error.handler";
 import loggerHandler from "./handlers/logger.handler.";
+import corsHandler from "./handlers/cors.handler";
 import IController from "./interfaces/controller.interface";
 
 import swaggerUi from "swagger-ui-express";
@@ -26,6 +27,7 @@ export default class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(loggerHandler);
+    this.app.use(corsHandler);
   }
 
   private iniciarErrorHandler(){
