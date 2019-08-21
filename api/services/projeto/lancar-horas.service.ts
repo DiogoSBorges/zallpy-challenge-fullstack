@@ -34,6 +34,6 @@ export class LancarHorasService {
       throw new ProjetoUsuarioSemPermissaoException();
     }
 
-    await LancamentoRepository.criarAsync(projetoId, usuarioId, horas);
+    return await LancamentoRepository.criarAsync(projetoId, usuarioId, horas);
   }
 }
