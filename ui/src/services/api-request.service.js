@@ -9,6 +9,13 @@ class ApiRequestService {
     });
   }
 
+  async getAsync(caminho, auth = true) {
+    return await fetch(`${process.env.REACT_APP_APP_URL}/${caminho}`, {
+      method: "GET",
+      headers: this.getHeader(auth)
+    });
+  }
+
   getHeader(isAuth) {
     if (isAuth) {
       return {
