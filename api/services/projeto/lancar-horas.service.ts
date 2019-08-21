@@ -9,11 +9,11 @@ import {
 import { UsuarioNaoEncontradoException } from "../../exceptions/usuario.exception";
 
 export class LancarHorasService {
-
   static async lancarHoras(
     projetoId: number,
     usuarioId: number,
-    horas: number
+    horas: number,
+    data: Date
   ) {
     const projeto = await ProjetoRepository.obterPorId(projetoId);
     if (!projeto) {
@@ -29,11 +29,11 @@ export class LancarHorasService {
       usuarioId,
       projetoId
     );
-    
+
     if (qtdPermissao !== 1) {
       throw new ProjetoUsuarioSemPermissaoException();
     }
 
-    return await LancamentoRepository.criarAsync(projetoId, usuarioId, horas);
+    return await LancamentoRepository.criarAsync(projetoId, usuarioId, horas, data);
   }
 }

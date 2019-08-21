@@ -41,7 +41,7 @@ describe("FazerLoginService", () => {
         return Promise.resolve();
       });
 
-      await lancarHorasService.lancarHoras(1, 1, 1);
+      await lancarHorasService.lancarHoras(1, 1, 1, new Date());
 
       chegouNoFinal = true;
 
@@ -67,7 +67,7 @@ describe("FazerLoginService", () => {
       });
 
       try {
-        await lancarHorasService.lancarHoras(1, 1, 1);
+        await lancarHorasService.lancarHoras(1, 1, 1, new Date());
       } catch (erro) {
         expect(erro.message).toEqual(
           new ProjetoUsuarioSemPermissaoException().message
@@ -86,7 +86,7 @@ describe("FazerLoginService", () => {
       });
 
       try {
-        await lancarHorasService.lancarHoras(1, 1, 1);
+        await lancarHorasService.lancarHoras(1, 1, 1, new Date());
       } catch (erro) {
         expect(erro.message).toEqual(
           new UsuarioNaoEncontradoException().message
@@ -100,7 +100,7 @@ describe("FazerLoginService", () => {
       });
 
       try {
-        await lancarHorasService.lancarHoras(1, 1, 1);
+        await lancarHorasService.lancarHoras(1, 1, 1, new Date());
       } catch (erro) {
         expect(erro.message).toEqual(
           new ProjetoNaoEncontradoException().message

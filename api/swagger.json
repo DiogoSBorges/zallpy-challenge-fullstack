@@ -126,7 +126,8 @@
             "in": "body",
             "name": "dto",
             "properties": {
-              "horas": { "type": "integer" }
+              "horas": { "type": "integer" },
+              "data": { "type": "string" }
             }
           }
         ],

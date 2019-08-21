@@ -46,7 +46,8 @@ export class ProjetoController implements IController {
       await LancarHorasService.lancarHoras(
         Number(projetoId),
         request.usuario.id,
-        request.body.horas
+        request.body.horas,
+        new Date(request.body.data)
       );
       response.status(200).send(projetoId);
     } catch (error) {

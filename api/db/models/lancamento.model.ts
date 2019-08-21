@@ -19,6 +19,10 @@ export default class UsuarioProjetoPermissao extends Model<UsuarioProjetoPermiss
     @Column
     projetoId: number ;
 
+    @ForeignKey(() => ProjetoModel) 
+    @Column
+    data: Date ;
+
     @Column
     horas: number ;
 }
