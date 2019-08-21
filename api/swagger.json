@@ -3,27 +3,25 @@
   "info": {
     "description": "FullStack JS",
     "version": "1.0.0",
-    "title": "Zallpy Challenge !!!",
-    "termsOfService": "http://swagger.io/terms/",
-    "contact": { "email": "apiteam@swagger.io" },
-    "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-    }
+    "title": "Zallpy Challenge !!!"
   },
   "host": "localhost:3000",
   "basePath": "/",
   "tags": [
     {
-      "name": "login",
+      "name": "Login",
       "description": "Login"
+    },
+    {
+      "name": "Projeto",
+      "description": "Projeto"
     }
   ],
   "schemes": ["http"],
   "paths": {
     "/login": {
       "post": {
-        "tags": ["login"],
+        "tags": ["Login"],
         "summary": "Fazer Login",
         "consumes": ["application/json", "application/json"],
         "produces": ["application/json", "application/json"],
@@ -46,13 +44,90 @@
         }
       },
       "get": {
-        "tags": ["login"],
+        "tags": ["Login"],
         "summary": "Fazer Login",
         "consumes": ["application/json", "application/json"],
         "produces": ["application/json", "application/json"],
         "security": [
           {
             "api_key": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        }
+      }
+    },
+    "/projeto/obter-por-usuario-logado": {
+      "get": {
+        "tags": ["Projeto"],
+        "summary": "Obter projeto por usuario logado",
+        "consumes": ["application/json", "application/json"],
+        "produces": ["application/json", "application/json"],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Projetos"
+            }
+          }
+        }
+      }
+    },
+    "/projeto/obter-todos": {
+      "get": {
+        "tags": ["Projeto"],
+        "summary": "Obter todos projetos (Usuário precisa ser Administrador)",
+        "consumes": ["application/json", "application/json"],
+        "produces": ["application/json", "application/json"],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Projetos"
+            }
+          }
+        }
+      }
+    },
+    "/projeto/{id}/lancar-horas": {
+      "post": {
+        "tags": ["Projeto"],
+        "summary": "Lançar horas no projeto",
+        "consumes": ["application/json", "application/json"],
+        "produces": ["application/json", "application/json"],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "dto",
+            "properties": {
+              "horas": { "type": "integer" }
+            }
           }
         ],
         "responses": {
@@ -84,9 +159,26 @@
         "data": {
           "properties": {
             "email": { "type": "string" },
-            "senha": { "type": "string" }
+            "senha": { "type": "string" },
+            "tipoId": { "type": "integer" }
           }
         }
+      }
+    },
+    "Projeto": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer" },
+        "nome": { "type": "string" },
+        "horas": { "type": "integer" },
+        "createdAt": { "type": "integer" },
+        "updatedAt": { "type": "integer" }
+      }
+    },
+    "Projetos": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Projeto"
       }
     }
   },

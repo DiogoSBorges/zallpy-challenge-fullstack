@@ -32,12 +32,6 @@
 
 ## Pendências
 
--- API
-```
- - Terminar documentação do swagger
- - Corrigir erro (migration) ao executar o "docker-compose up" novamente. 
-```
-
 -- Front-end
 ```
  - Implementar funcionalidade log out.

@@ -1,4 +1,4 @@
-version: "2"
+version: "2.1"
 services:
   ui:
     build:
@@ -15,7 +15,8 @@ services:
     build:
       context: ./api
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     restart: always
     ports:
       - "3000:3000"
@@ -30,3 +31,8 @@ services:
       POSTGRES_USER: zallpy
       POSTGRES_PASSWORD: zallpy
       POSTGRES_DB: zallpy
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5 
