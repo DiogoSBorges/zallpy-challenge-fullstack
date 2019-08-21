@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "tsc": "tsc",
+    "debug": "set DEBUG=express:* & node ./build/server.js",
     "start": "node ./build/server.js",
     "generate": "tsoa swagger",
     "test": "jest"

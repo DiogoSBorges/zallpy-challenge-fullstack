@@ -4,7 +4,8 @@ import {
   PrimaryKey,
   ForeignKey,
   Unique,
-  Model
+  Model,
+  AutoIncrement
 } from "sequelize-typescript";
 
 import UsuarioTipo  from "./usuario-tipo.model";
@@ -14,6 +15,7 @@ import UsuarioTipo  from "./usuario-tipo.model";
 })
 export default class Usuario extends Model<Usuario> {
   @PrimaryKey
+  @AutoIncrement
   @Column
   id: number;
 
