@@ -14,6 +14,7 @@ module.exports = {
           },
           usuarioId: {
             type: Sequelize.INTEGER,
+            foreignKey:true,
             references: {
               model: {
                 tableName: "Usuario"
@@ -24,6 +25,7 @@ module.exports = {
           },
           projetoId: {
             type: Sequelize.INTEGER,
+            foreignKey:true,
             references: {
               model: {
                 tableName: "Projeto"
@@ -43,8 +45,8 @@ module.exports = {
         },
         { transaction }
       );
-
-      await queryInterface.addConstraint(
+      
+      queryInterface.addConstraint(
         "UsuarioProjetoPermissao",
         ["usuarioId", "projetoId"],
         {
@@ -53,13 +55,15 @@ module.exports = {
         },
         { transaction }
       );
+
       await transaction.commit();
+
     } catch (err) {
       await transaction.rollback();
       throw err;
     }
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("Usuario");
+    return queryInterface.dropTable("UsuarioProjetoPermissao");
   }
 };

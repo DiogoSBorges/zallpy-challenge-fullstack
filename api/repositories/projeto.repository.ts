@@ -1,7 +1,21 @@
+import ProjetoModel from "./../db/models/projeto.model";
 import { sequelize } from "./../sequelize";
 import { ProjetoErroAoObterNaBaseDeDadosException } from "../exceptions/projeto.exception";
 
 export class ProjetoRepository {
+  
+  static obterPorId: any = async (id: number) => {
+    try {
+      return await ProjetoModel.findOne({
+        where: {
+          id: id
+        }
+      });
+    } catch (e) {
+      throw new ProjetoErroAoObterNaBaseDeDadosException();
+    }
+  };
+
   static obterPorUsuarioAsync: any = async (usuarioId: number) => {
     try {
       const query: string = `SELECT 

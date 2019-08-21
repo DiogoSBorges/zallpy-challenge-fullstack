@@ -1,6 +1,7 @@
 import { NextFunction, Response } from "express";
 import { TokenService } from "./../services/token.service";
 import IRequest from '../interfaces/request.interface'
+import {AppAcessoRestritoException, AppTokenInvalidoException} from '../exceptions/app.exception';
 
 async function autorizacaoHandler(
   request: IRequest,
@@ -13,18 +14,14 @@ async function autorizacaoHandler(
     request.headers["x-access-token"];
 
   if (!token) {
-    response.status(401).json({
-      message: "Acesso Restrito"
-    });
+    next(new AppAcessoRestritoException());
   } else {
     try {
       const decoded = await TokenService.decodificarToken(token);
       request.usuario = decoded;
       next();
     } catch (error) {
-      response.status(401).json({
-        message: "Token Inválido"
-      });
+      next(new AppTokenInvalidoException());
     }
   }
 }

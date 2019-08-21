@@ -1,6 +1,6 @@
 import { Request, Response, Router, NextFunction } from "express";
 import IController from "./../interfaces/controller.interface";
-import { FazerLoginService } from "./../services/fazer-login.service";
+import { FazerLoginService } from "../services/login/fazer-login.service";
 
 export class LoginController implements IController {
   public path = "/login";

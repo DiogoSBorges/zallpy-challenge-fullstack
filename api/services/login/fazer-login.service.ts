@@ -1,6 +1,6 @@
-import { UsuarioRepository } from "./../repositories/usuario.repository";
-import { TokenService } from "./../services/token.service";
-import { UsuarioEmailOuSenhaInvalidosException } from "./../exceptions/usuario.exception";
+import { UsuarioRepository } from "../../repositories/usuario.repository";
+import { TokenService } from "../token.service";
+import { UsuarioEmailOuSenhaInvalidosException } from "../../exceptions/usuario.exception";
 import md5 from "md5";
 
 export class FazerLoginService {

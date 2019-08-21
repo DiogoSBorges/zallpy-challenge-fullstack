@@ -1,7 +1,7 @@
-import { FazerLoginService } from "./../fazer-login.service";
-import { UsuarioRepository } from "./../../repositories/usuario.repository";
-import { TokenService } from "./../../services/token.service";
-import { UsuarioEmailOuSenhaInvalidosException } from "./../../exceptions/usuario.exception";
+import { FazerLoginService } from "../fazer-login.service";
+import { UsuarioRepository } from "../../../repositories/usuario.repository";
+import { TokenService } from "../../../services/token.service";
+import { UsuarioEmailOuSenhaInvalidosException } from "../../../exceptions/usuario.exception";
 
 const Usuario = {
   email: "email@email.com",
@@ -14,17 +14,13 @@ const Usuario = {
 describe("FazerLoginService", () => {
   const fazerLoginService = FazerLoginService;
   describe("Quando fazer login", () => {
-    it("Deve retornar objeto", () => {
-      expect(
-        typeof fazerLoginService.fazerLogin(Usuario.email, Usuario.senha)
-      ).toEqual("object");
-    });
     it("Objeto deve possuir dados corretos", async () => {
       const UsuarioRepositoryMock = jest.spyOn(
         UsuarioRepository,
         "obterPorEmailESenha"
       );
-      UsuarioRepositoryMock.mockImplementation(() => {
+
+       UsuarioRepositoryMock.mockImplementation(() => {
         return Promise.resolve({
           id: 1,
           email: Usuario.email,
@@ -35,21 +31,20 @@ describe("FazerLoginService", () => {
       });
 
       const TokenServiceMock = jest.spyOn(TokenService, "gerarToken");
-      TokenServiceMock.mockImplementation(() => {
+       TokenServiceMock.mockImplementation(() => {
         return Promise.resolve(Usuario.token);
       });
-
-      const resultado = await fazerLoginService.fazerLogin(
+      
+      fazerLoginService.fazerLogin(
         Usuario.email,
         Usuario.senha
-      );
-
-      expect(resultado.token).toEqual(Usuario.token);
-      expect(resultado.data.email).toEqual(Usuario.email);
-      expect(resultado.data.nome).toEqual(Usuario.nome);
-      expect(resultado.data.tipoId).toEqual(Usuario.tipoId);
-    });
-
+      ).then(resultado => {
+        expect(resultado.token).toEqual(Usuario.token);
+        expect(resultado.data.email).toEqual(Usuario.email);
+        expect(resultado.data.nome).toEqual(Usuario.nome);
+        expect(resultado.data.tipoId).toEqual(Usuario.tipoId);
+      });      
+    });    
     it("Deve lançar exception quando não encontrar pessoa", async () => {
       const UsuarioRepositoryMock = jest.spyOn(
         UsuarioRepository,
