@@ -37,7 +37,7 @@
 ## Melhorias que poderiam ser feitas
 
 -- API
-* Implementar mais regras na funcionalidade de lançar horas (Ex: a  data informada não pode ser maior que data atual).
+* Implementar mais regras na funcionalidade de lançar horas (Ex: a data informada não pode ser maior que data atual; não pode ser lançado mais de 8 horas em um projeto na mesma data).
 * Validação de entrada de valores nos controllers e services.
 * Automatizar a geração do JSON do SWAGGER.
 
