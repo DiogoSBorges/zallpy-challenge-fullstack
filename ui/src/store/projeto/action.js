@@ -34,8 +34,19 @@ export const carregarProjetos = () => {
       let list = await projetoService.obterPorUsuarioLogadoAsync();
       return dispatch(carregarProjetosSucesso(list));
     } catch (error) {
-        console.log("HHHHH");
+      return dispatch(carregarProjetosError(error.message));
+    }
+  };  
+};
+
+export const carregarTodosProjetos = () => {
+  return async dispatch => {
+    dispatch(carregarProjetosRequestig());
+    try {
+      let list = await projetoService.obterTodosAsync();
+      return dispatch(carregarProjetosSucesso(list));
+    } catch (error) {
       return dispatch(carregarProjetosError(error.message));
     }
   };
-};
+}

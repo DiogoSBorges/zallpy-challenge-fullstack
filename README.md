@@ -29,13 +29,19 @@
 ```
 > http://localhost:8000
 ```
+-- Rotas APP
+* "/" - Lista projetos que usuário tem permissão
+* "/admin" - Lista todos os projetos com todas as horas laçadas nos mesmos
+* "/login" - Tela de login
 
-## Pendências
+## Melhorias que poderiam ser feitas
 
--- Front-end
-```
- - Implementar funcionalidade log out.
- - Implementar funcionalidade (Tela) de lançar horas.
- - Implementar funcionalidade (Tela) de visualizar todos os projetos (Admin).
- - Organizar componentes de listagem e item de projeto.
-```
+-- API
+* Implementar mais regras na funcionalidade de lançar horas (Ex: a  data informada não pode ser maior que data atual).
+* Validação de entrada de valores nos controllers e services.
+* Automatizar a geração do JSON do SWAGGER.
+
+-- UI
+* Melhorar na estilização e responsividade e também na utilização correta de estilos.
+* Melhorar no quesito usabilidade para o usuário.
+* Implementar Login utilizando redux.

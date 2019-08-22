@@ -12,18 +12,18 @@ const AppPrivateRoute = ({
 }) => (
   <Route
     {...rest}
-    render={props =>        
-      UserProfileService.isAutenticado() === true ? (
-        UserProfileService.isAutorizado(Roles) ? (
-          <Layout>
+    render={props =>      
+      <Layout> 
+      {UserProfileService.isAutenticado() === true ? (
+        UserProfileService.isAutorizado(Roles) ? (        
             <Component {...props} />
-          </Layout>
         ) : (
           <h1>Não Tem Permissão</h1>
         )
       ) : (
         <Redirect to="/login" />
-      )
+      )}
+      </Layout> 
     }
   />
 );
