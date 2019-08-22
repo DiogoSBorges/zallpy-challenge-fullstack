@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import UsuarioProfileService from "./../../services/usuario-profile.service";
 
-import LoadingComponent from './../loading/loading.component'
+import LoadingComponent from "./../loading/loading.component";
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import { carregarProjetos } from "./../../store/projeto/action";
+import { Modal, Button, Icon } from "react-materialize";
+
+import FormularioLancarHoras from "./formulario-lancar-horas.component";
 
 import M from "materialize-css";
+import moment from "moment";
 
 class DashboardComponent extends Component {
   componentWillMount() {
@@ -24,16 +28,47 @@ class DashboardComponent extends Component {
       <div>
         <h1>Ola {UsuarioProfileService.obterUsuario().data.nome}</h1>
 
-        <h2>Seus Projetos</h2>
-        <div className="row center-align">
+        <div className="center-align">
+          <h3>Projetos</h3>
           {this.props.isRequesting ? (
-            <LoadingComponent/>
+            <LoadingComponent />
           ) : this.props.isLoadSuccess ? (
-            this.props.projetos.map((n, i) => (
-              <h3>
-                Projeto: {n.nome} - Horas:{n.horas}
-              </h3>
-            ))
+            <div style={{ padding: "1% 5% 5% 10%" }}>
+              <table className="responsive-table">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Horas</th>
+                    <th>Data Criação</th>
+                    <th>#</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.props.projetos.map((n, i) => (
+                    <tr>
+                      <td>{n.nome}</td>
+                      <td>{n.horas}</td>
+                      <td>{moment(n.createdAt).format("DD/MM/YYYY")}</td>
+                      <td>
+                        <Modal
+                          header={`Lançar horas no Projeto: ${n.nome}`}
+                          trigger={
+                            <Button
+                              waves="light"
+                              className="btn modal-trigger trigger-modal btn-floating waves-effect waves-light green"
+                            >
+                              <Icon right>create</Icon>
+                            </Button>
+                          }
+                        >
+                          <FormularioLancarHoras projetoId={n.id} />
+                        </Modal>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : (
             <h1>{this.props.erroMessage}</h1>
           )}
